@@ -1,13 +1,325 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+html{
+  font-size: clamp(0.56rem, 1vw, 18px);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@media screen and (max-width:650px) {
+  html{
+    font-size: clamp(0.56rem, 3vw, 14px);
+  }
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: #fff;
+}
+
+.App{
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;/* 
+  max-height: 100vh; */
+  overflow: hidden;
+}
+
+.background {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items:center;
+  z-index: -1;
+}
+
+.background img {
+  position: relative;
+  filter: brightness(0.8);
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width: 650px){
+  .App{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .background {
+    position: fixed;
+  }
+}
+
+
+/* ============== MAIN ==================== */
+
+.main{
+  align-self: flex-end;
+}
+
+.main__info {
+  display: flex;
+  margin-left: 1.7rem;
+  margin-bottom: 2.8rem;
+  padding: 2.8rem 2.8rem 2.2rem 2.8rem;
+  align-items: center;  
+}
+
+.main__temp{
+  font-size: 8.3rem;
+  line-height: 73%;
+  margin-right: 0.28rem;
+}
+
+.main__city{
+  font-size: 2.8rem;
+  margin-bottom: 0.28rem;
+  margin-right: 0.56rem;
+}
+
+.main__icon{
+  width: 5.6rem;
+  height: 5.6rem;
+}
+
+
+@media screen and (max-width: 650px){
+  .main {
+    width: 100vw;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  } 
+
+  .main__info {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 480px){
+  .main {
+    height: 30dvh;
+  } 
+}
+/* ============== ASIDE ==================== */
+
+.aside{
+  padding: 2.2rem 5.6rem 2.2rem 2.8rem;  
+  backdrop-filter: blur(1rem);
+  border-left: 0.28rem solid #ffffff0c;
+  min-height: 100vh;
+  overflow: scroll;
+  width: 30%;  
+}
+
+.aside::-webkit-scrollbar {
+  width: 4px; /* Ширина всего элемента навигации */
+}
+
+.aside::-webkit-scrollbar-track {
+  background: #ffffff11; /* Цвет дорожки */
+}
+
+.aside::-webkit-scrollbar-thumb {
+  background-color: #ffffff61; /* Цвет бегунка */
+  border-radius: 20px; /* Округление бегунка */
+}
+
+.location{
+  display: flex;
+  align-items: center;
+}
+
+.location__search{
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ffffff;
+  
+  margin-right: 1.1rem;
+  width: 100%;
+}
+
+.search-icon{
+  width: 1.4rem;
+  height: 1.4rem;
+  cursor: pointer;
+}
+
+.search__input{
+  background: none;
+  border: none;
+  outline: none;  
+  color: #fff;
+  padding: 0.56rem 1.1rem 0.56rem 1.1rem;
+  font-size: 1.1rem;
+  box-sizing: border-box;
+  
+}
+
+.search__input::placeholder{
+  color: white;
+  opacity: 0.7;
+  font-size: 1.1rem;
+}
+
+.location__geo-icon{
+  width: 1.7rem;
+  height: 1.7rem;
+  cursor: pointer;
+}
+
+.aside__descriptions{
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+  margin-top: 2.8rem;
+}
+
+.aside__descriptions:first-letter{
+  text-transform: uppercase
+}
+
+.detail-container{
+  display: flex;
+  align-items: center;
+}
+
+
+.aside__details{
+  display: flex;
+  flex-direction: column;
+  gap: 1.7rem;
+  opacity: 0.7;
+  font-size: 1rem;
+  font-weight: 300;
+  padding-bottom: 1.7rem;
+  margin-bottom: 2.8rem;
+  border-bottom: 1px solid #fff;
+}
+
+.icon{
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.aside__details p {
+  margin-right: 1.1rem;
+}
+
+.detail-title{
+  flex: 1 1 auto;
+}
+
+/* ============= NEAR FORECAST =================== */
+
+.aside__near{
+  padding-bottom: 1.7rem;
+  margin-bottom: 2.8rem;
+  border-bottom: 1px solid #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 1.7rem;
+}
+
+.near__forecast{
+  display: grid;
+  grid-template-columns: 3.9rem 5fr 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas: 
+  "icon time temp"
+  "icon description temp";
+  width: 100%;
+  font-weight: 300; 
+}
+
+.near__title,
+.daily__title{
+  font-size: 1.4rem;
+  margin-bottom: 0.56rem;
+}
+
+.near-forecast__icon{
+  grid-area: icon;
+  width: 1.9rem;
+  height: 1.9rem;
+}
+
+.near-forecast__time{
+  grid-area: time;
+  margin-bottom: 0.28rem;
+}
+
+.near-forecast__temp{
+  grid-area: temp;
+  opacity: 0.7;
+  font-size: 1.5rem;
+  justify-self: end;
+}
+
+.near-forecast__description{
+  grid-area: description;
+  opacity: 0.7;
+}
+
+/* ============= DAILY FORECAST =================== */
+
+.aside__daily{
+  margin-bottom: 2.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.7rem;
+}
+
+.daily__forecast{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  row-gap: 0px;
+  font-weight: 300;
+}
+
+.daily-forecast__weekday{
+  font-size: 1.1rem;
+  opacity: 0.7;
+  margin-bottom: 0.56rem;
+}
+
+.daily-forecast__calendar-day{
+  font-size: 1.4rem;
+  
+}
+
+.daily-forecast__temp{
+  justify-self: end;
+  font-size: 1.4rem;
+}
+
+.night-temp{
+  font-size: 1.1rem;
+  opacity: 0.7;
+}
+
+
+@media screen and (max-width: 650px){
+  .aside{
+    width: 100%;
+    box-sizing: border-box;
+    overflow: visible;
+    border-left: none;
+    border-top: 0.28rem solid #ffffff0c;
+    padding: 2.8rem; 
+    min-height: auto;
+  }
+
+  .aside__daily{
+    margin-bottom: 0;
+  }
+
+  .location{
+    align-self: flex-end;
+    padding: 2.2rem 2.2rem 0 0;
+  }
 }
