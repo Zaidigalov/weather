@@ -22,8 +22,6 @@ export default function formatingForDaily(data, timezone){
 		setDays.add(new Date(item.dt*1000).getDate())
 	})
 
-	const days = Array.from(setDays)
-
 	const mapDays = new Map()
 	for (const day of setDays) {
 		mapDays.set(day, []);
